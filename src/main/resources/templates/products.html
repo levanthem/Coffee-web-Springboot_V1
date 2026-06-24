@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.themeleaf.html">
+<head>
+    <meta charset="UTF-8">
+    <title>The list of Products</title>
+</head>
+<body>
+    <h1 >Cafe Le Van Them - The list of Product </h1>
+<h2 th:text="${msg}">Chao ngay moi</h2>
+<h3>The list of Le Van Them Coffee</h3>
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Action(Update|Delete)</th>
+    </thead>
+    <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}">    </td>
+                <td th:text="${product.name}">    </td>
+                <td th:text="${product.price}">    </td>
+                <td>
+                    <a th:href="@{'/products/edit/' + ${product.id}}">Update</a>
+                    <a th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+                </td>
+            </tr>
+    </tbody>
+</table>
+</body>
+</html>
