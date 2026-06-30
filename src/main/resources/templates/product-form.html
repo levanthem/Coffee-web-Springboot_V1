@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Create | Update Coffee Product</title>
@@ -9,20 +10,25 @@
 <!--Can cai fomr lam o nhap, de nhan nut save luuw thong tin nhap  for=id an voi id='id' cho gui-->
         <!--name = name la bien, value la $ -->
 <!--        <form th:action="@{/update}" th:object="${selectProduct}" method="post">-->
-        <form th:action="@{/products/edit}"  method="post">
+        <form th:action="@{/products/save}"  method="post"  th:object="${selectProEdit}">
             <p>
                 <label for="id">Product id</label>
-                <input type="Text" name="id" th:value="${selectProEdit.id}" id="id"/>
+<!--                <input type="Text" name="id" th:value="${selectProEdit.id}" id="id"/>-->
+                <input type="text"  th:field="*{id}" id="id"/>
             </p>
             <p>
                 <label for="name">Product Name</label>
-                <input type="Text" name="name" th:value="${selectProEdit.name}" id="name"/>
+                <input type="text"  th:field="*{name}" id="name"/>
             </p>
             <p>
-                <label for="name">Product Price</label>
-                <input type="Text" name="price" th:value="${selectProEdit.price}" id="price"/>
+<!--                <label for="name">Product Price</label>-->
+                <label for="price">Product Price</label>
+                <input type="number" th:field="*{price}" id="price"/>
             </p>
-<!--            <p>-->
+
+<!--              field dong 2 vai tro : lay value cua cot tron object show trong che do  edit,-->
+<!--                                     dat ten cho o nhap la ten cot trich tu trong object th:name="id" , th value=gia tri  cua cot selectproedit.id-->
+<!--&lt;!&ndash;            <p>&ndash;&gt;-->
 <!--                <label for="cate">Category</label>-->
 <!--                <select name="category" id="cate" >-->
 <!--                    <option value="100">Traf Sua</option>-->
@@ -45,8 +51,7 @@
                 </select>
 
             </p>
-            <butt>
-                <input type="submit" /> SAVE</butt>
+            <button type="submit">SAVE</button>
         </form>
 
 

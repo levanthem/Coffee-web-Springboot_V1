@@ -60,17 +60,19 @@ public class ProductController {
     // va nhan vao cac gia tri goi trong o dua len
     //@RequestParam("id") String id  gui tung o nhap o form gui len server, map vao bien hung trong ham, bien trong ham ko can giong bien duoi form gui len\
     //nhung @RequestParam("id")  = @RequestParam("ten bien o ben form html thuoc tinh "name" cua  o nhap ")
-    @PostMapping("/products/edit")   // String id la bien cua ham , @requestParam(id) id nay la bien name o html gui len.
-    public String Update(RedirectAttributes redirectAttributes, @RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("price") String price   , Model model) {
-       // 2 lenh nay vo dung neu dung redirect, riderect dung thung khac
+    @PostMapping("/products/save")   // String id la bien cua ham , @requestParam(id) id nay la bien name o html gui len.
+    public String Update( @ModelAttribute("selectProEdit") Product pro,  Model model,RedirectAttributes redirectAttributes) {
+       // Goi service va repo save database.
+        System.out.println(pro);
+        // 2 lenh nay vo dung neu dung redirect, riderect dung thung khac
         model.addAttribute("msg", " Da edit thanh cong - MOCK message!!!");
-        model.addAttribute("pname", name);
+        model.addAttribute("pname", pro.getName());
 
         //
         // thung do co 2 mon: cau thonog bao va ten san pham
 //        return "result";  //.html
         redirectAttributes.addFlashAttribute("formMsg", "Da edit thanh cong - MOCK message!!!");
-        redirectAttributes.addFlashAttribute("pname", name);
+        redirectAttributes.addFlashAttribute("pname", pro.getName());
         return "redirect:/products";  //.html   --> goi lai url moi hoan toan
 
         // voi ham post ban chat get nhung co gui data len ham truoc khi get, nen neu url ko doi se bi resubmit khi refresh page, dupliate data gui len

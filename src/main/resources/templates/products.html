@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.themeleaf.html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>The list of Products</title>
@@ -17,10 +17,13 @@
     </p>
 <table>
     <thead>
+    <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
         <th>Action(Update|Delete)</th>
+    </tr>
+
     </thead>
     <tbody>
             <tr th:each="product : ${products}">
@@ -41,7 +44,7 @@
 <script th:if="${formMsg}" th:inline="javascript">
     window.addEventListener('load', function() {
         // Thymeleaf sẽ render thành: alert("…");
-        alert([[${formMsg}]]);
+        alert('[[${formMsg}]]');
     });
 </script>
 </html>
