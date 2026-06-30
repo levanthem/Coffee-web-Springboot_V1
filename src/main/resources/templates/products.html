@@ -5,9 +5,16 @@
     <title>The list of Products</title>
 </head>
 <body>
+
     <h1 >Cafe Le Van Them - The list of Product </h1>
-<h2 th:text="${msg}">Chao ngay moi</h2>
+<!--<h2 th:text="${msg}">Chao ngay moi</h2>-->
+    <h1 th:if="${formMsg}" th:text="'STATUS: ' + ${formMsg}" style="color:deeppink">Edit successfull</h1>
+    <!-- khong xo formMsg do ko phai hang chinh chu ma gui ke, chi hien khi runtime!-->
+    <h1 th:if="${formMsg}" th:text="'Edit name: ' + ${pname}" style="color:deeppink">Edit successfull</h1>
 <h3>The list of Le Van Them Coffee</h3>
+    <p>
+        <a th:href="@{/products/create/}">create a new product</a>
+    </p>
 <table>
     <thead>
         <th>ID</th>
@@ -28,4 +35,13 @@
     </tbody>
 </table>
 </body>
+
+
+<!-- Script alert sau khi trang load xong -->
+<script th:if="${formMsg}" th:inline="javascript">
+    window.addEventListener('load', function() {
+        // Thymeleaf sẽ render thành: alert("…");
+        alert([[${formMsg}]]);
+    });
+</script>
 </html>

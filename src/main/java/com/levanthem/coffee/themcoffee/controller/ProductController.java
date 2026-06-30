@@ -1,11 +1,13 @@
 package com.levanthem.coffee.themcoffee.controller;
 
+import com.levanthem.coffee.themcoffee.entity.Category;
 import com.levanthem.coffee.themcoffee.entity.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.swing.*;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,31 @@ import java.util.List;
 // 1 url get ung voi 1 ham return "TRANG HTML", ham phai nam trong 1 thang controller
 @Controller  // RESPONCONTROLLER nghe tra ve json
 public class ProductController {
+    @GetMapping("/products/create/")
+    public String create(Model model){
+        model.addAttribute("selectProEdit",new Product());
+        model.addAttribute("cates", getCategories());
+        return "product-form"; // .html
+    }
+
+
+
+    // Chuan bi danh sach category va tra ve cho trang prduct -form de show danh sach chon loai san pham
+    // Le ra phai o ben categoryService , category Repo
+
+
+    public List<Category> getCategories() {
+        List<Category> categories = List.of(
+                new Category(100L,"Tra Sua"," Tra Sua Dai Loan"),
+                new Category(200L,"Cafe"," Cafe Trung Nguyen"),
+                new Category(300L,"Banh Keo"," Banh keo tet"),
+                new Category(400L,"VPP"," Van phong pham"),
+                new Category(500L,"Bia Ruowu"," Bia Ruowu")
+        );
+        return categories;
+    }
+
+
     @GetMapping("/result")
     public String   result(Model model){
         return  "result";  // . html  --> null
@@ -42,9 +69,9 @@ public class ProductController {
         //
         // thung do co 2 mon: cau thonog bao va ten san pham
 //        return "result";  //.html
-        redirectAttributes.addFlashAttribute("msg", "Da edit thanh cong - MOCK message!!!");
+        redirectAttributes.addFlashAttribute("formMsg", "Da edit thanh cong - MOCK message!!!");
         redirectAttributes.addFlashAttribute("pname", name);
-        return "redirect:/result";  //.html   --> goi lai url moi hoan toan
+        return "redirect:/products";  //.html   --> goi lai url moi hoan toan
 
         // voi ham post ban chat get nhung co gui data len ham truoc khi get, nen neu url ko doi se bi resubmit khi refresh page, dupliate data gui len
         // do do phai tra ve trang result phai doi url result luon
@@ -71,6 +98,7 @@ public class ProductController {
         }
 
         model.addAttribute("selectProEdit",selectedProduct);
+        model.addAttribute("cates", getCategories());
 
         return "product-form";
     }

@@ -22,6 +22,29 @@
                 <label for="name">Product Price</label>
                 <input type="Text" name="price" th:value="${selectProEdit.price}" id="price"/>
             </p>
+<!--            <p>-->
+<!--                <label for="cate">Category</label>-->
+<!--                <select name="category" id="cate" >-->
+<!--                    <option value="100">Traf Sua</option>-->
+<!--                    <option value="200" selected="true">cafe</option>-->
+<!--                    <option value="300">Banh keo</option>-->
+<!--                    <option value="400">VPP</option>-->
+<!--                    <option value="500">Bia Ruou</option>-->
+<!--                </select>-->
+
+<!--            </p>-->
+
+            <p>
+                <label for="cate">Category</label>
+                <select name="category" id="cate" >
+                    <option th:each="x : ${cates}"
+                            th:text="${x.name}"
+                            th:value="${x.id}"
+                    th:selected ="${x.id==200}" >Tra sua bi thay the bang th:text</option>
+
+                </select>
+
+            </p>
             <butt>
                 <input type="submit" /> SAVE</butt>
         </form>
